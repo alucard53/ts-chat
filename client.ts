@@ -4,9 +4,10 @@ const socket = io("ws://localhost:3000");
 
 process.stdin.on("data", (data) => {
   const [action, room, ...msg] = data.toString().split(" ");
+  console.log(JSON.stringify({ room }))
   if (action === "join") {
     if (room) {
-      socket.emit(action, room.slice(0, room.length - 1));
+      socket.emit(action, room.slice(0, room.length - 2));
     } else {
       console.error("Enter room name");
     }
